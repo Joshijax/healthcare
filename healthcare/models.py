@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime 
 from accounts.models import DoctorProfile
-reverse
+from django.urls import reverse
 from django.db import transaction
 
 class Location(models.Model):
