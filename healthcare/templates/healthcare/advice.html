@@ -1,0 +1,143 @@
+{% extends 'healthcare/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Get Advice</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron jumbotron-fluid" style="margin-top: 20px;">
+                <div class="container">
+                <h3 class="display-4">Body Mass Index calculator(BMI)</h3>
+                    <form id="BMIform">
+                    {% csrf_token %}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Weight</label>
+                                <input required id="widthBMI" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter width">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Height</label>
+                                <input required id="heightBMI" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter height">
+                            </div>
+                            <button id="submitBMI" type="submit" class="btn btn-primary">Calculate</button>
+                            <i id ="my_loadBMI" style="display: none; z-index: 5; color: black;" class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom"></i>
+                            <br>
+                            <h4 class="text-success" id="BMIresult"></h4>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+         <div class="col-sm-6">
+            <div class="jumbotron jumbotron-fluid" style="margin-top: 20px;">
+                <div class="container">
+                <h3 class="display-4">Basal Metabolic Rate (BMR)</h3>
+                    <form id="BMRform">
+                    {% csrf_token %}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Weight</label>
+                                <input required id="widthBMR" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter width">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Height</label>
+                                <input required id="heightBMR" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter height">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="genderBMR">Gender</label>
+                                <select required  class="form-control" id="genderBMR">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Age</label>
+                                <input  required id="ageBMR" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Age">
+                            </div>
+                        </div>
+                            <button id="submitBMR" type="submit" class="btn btn-primary">Calculate</button>
+                            <i id ="my_loadBMR" style="display: none; z-index: 5; color: black;" class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom"></i>
+                            <br>
+                            <h4 class="text-success" id="BMRresult"></h4>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+        <div class="col-sm-6">
+            <div class="jumbotron jumbotron-fluid" style="margin-top: 20px;">
+                <div class="container">
+                <h3 class="display-4">Waist To Hip Ratio (WHR)</h3>
+                    <form id="WHRform">
+                    {% csrf_token %}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">My waist size is (cm)</label>
+                                <input required id="widthWHR" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter waist size">
+                            </div>
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">My hip size is (cm)</label>
+                                <input required id="heightWHR" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter hip size">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="genderWHR">Gender</label>
+                                <select required  class="form-control" id="genderWHR">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                      
+                        
+                            <button id="submitWHR" type="submit" class="btn btn-primary">Calculate</button>
+                            <i id ="my_loadWHR" style="display: none; z-index: 5; color: black;" class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom"></i>
+                            <br>
+                            <h4 class="text-success" id="WHRresult"></h4>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+        <div class="col-sm-6">
+            <div class="jumbotron jumbotron-fluid" style="margin-top: 20px;">
+                <div class="container">
+                <h3 class="display-4">Pregnancy Due Date</h3>
+                    <form id="PRGform">
+                    {% csrf_token %}
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">When was your last menstrual period</label>
+                                <select required  class="form-control" id="month">
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="color:black;" for="exampleInputEmail1">Day of the month</label>
+                                <input required id="heightPRG" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter exact day">
+                            </div>
+                        </div>
+                        
+                      
+                        
+                            <button id="submitPRG" type="submit" class="btn btn-primary">Calculate</button>
+                            <i id ="my_loadPRG" style="display: none; z-index: 5; color: black;" class="fa fa-spinner fa-spin fa-2x fa-fw margin-bottom"></i>
+                            <br>
+                            <h4 class="text-success" id="PRGresult"></h4>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    {% include 'includes/_scripts.html' %}
+{% endblock %}

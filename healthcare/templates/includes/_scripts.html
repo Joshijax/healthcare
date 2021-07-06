@@ -1,0 +1,188 @@
+<!-- jQuery library -->
+
+{% load static %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+
+            $(document).on('submit', '#BMIform', function(e){
+              e.preventDefault();
+              var texter = "Your BMI is ";
+              $('#submitBMI').hide();
+              $('#my_loadBMI').show();
+              console.log($('#widthBMI').val());
+              $.ajax({
+                type: 'POST',
+                url: '{% url 'healthcare:BMI' %}',
+                data:{
+                  height: $('#widthBMI').val(),
+                  weight:$('#heightBMI').val(),
+                  csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                
+                success:function(response){
+                  
+                  console.log(response.BMI);
+                  $('#BMIresult').text(texter + response.BMI);
+                  $('#submitBMI').show();
+                $('#my_loadBMI').hide();
+                },
+                error: function(data) {
+                  $('#Notifications').html(data.message).css('color', 'red');
+                    $('#submitBMI').show();
+                $('#my_loadBMI').hide();
+                }
+              });
+            });
+
+            
+            $(document).on('submit', '#BMRform', function(e){
+              e.preventDefault();
+              var texter = "Your BMR is ";
+              $('#submitBMR').hide();
+              $('#my_loadBMR').show();
+              console.log($('#genderBMR').val());
+              $.ajax({
+                type: 'POST',
+                url: '{% url 'healthcare:BMR' %}',
+                data:{
+                  height: $('#widthBMR').val(),
+                  weight:$('#heightBMR').val(),
+                  gender: $('#genderBMR').val(),
+                  age:$('#ageBMR').val(),
+                  csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                
+                success:function(response){
+                  
+                  console.log(response.BMR);
+                  $('#BMRresult').text(texter + response.BMR);
+                  $('#submitBMR').show();
+                $('#my_loadBMR').hide();
+                },
+                error: function(data) {
+                  $('#Notifications').html(data.message).css('color', 'red');
+                    $('#submitBMR').show();
+                $('#my_loadBMR').hide();
+                }
+              });
+            });
+
+                   
+            $(document).on('submit', '#WHRform', function(e){
+              e.preventDefault();
+              var texter = "Your WHR is ";
+              $('#submitWHR').hide();
+              $('#my_loadWHR').show();
+              console.log($('#genderWHR').val());
+              var gender = $('#genderWHR').val()
+              $.ajax({
+                type: 'POST',
+                url: '{% url 'healthcare:WHR' %}',
+                data:{
+                  height: $('#widthWHR').val(),
+                  weight:$('#heightWHR').val(),
+                  gender: $('#genderWHR').val(),
+                 
+                  csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                
+                success:function(response){
+                  
+                  console.log(response.WHR);
+                  if(response.WHR < 1){
+                    console.log("true")
+                  }
+                  if(gender=="male"){
+                    console.log('malego')
+                    if(response.WHR <= 1){
+                        $('#WHRresult').text('Your have a normal waist male to hip ratio of ' + response.WHR).css('color', 'green');
+                        $('#submitWHR').show();
+                        $('#my_loadWHR').hide();
+                      }else{
+                        $('#WHRresult').text('Your have a abnormal male waist to hip ratio of ' + response.WHR).css('color', 'red');
+                        $('#submitWHR').show();
+                        $('#my_loadWHR').hide();
+                      }
+
+                  }
+                  if(gender=="female"){
+                    if(response.WHR <= 0.85){
+                        $('#WHRresult').text('Your have a normal female waist to hip ratio of ' + response.WHR).css('color', 'green');
+                        $('#submitWHR').show();
+                        $('#my_loadWHR').hide();
+                      }else{
+                        $('#WHRresult').text('Your have a abnormal female waist to hip ratio of ' + response.WHR).css('color', 'red');
+                        $('#submitWHR').show();
+                        $('#my_loadWHR').hide();
+                      }
+
+                  }
+
+                  
+                },
+                error: function(data) {
+                  $('#Notifications').html(data.message).css('color', 'red');
+                    $('#submitWHR').show();
+                $('#my_loadWHR').hide();
+                }
+              });
+            });
+
+            $(document).on('submit', '#PRGform', function(e){
+              e.preventDefault();
+              var texter = "Your PRG is ";
+              $('#submitPRG').hide();
+              $('#my_loadPRG').show();
+              console.log($('#genderPRG').val());
+              var gender = $('#genderPRG').val()
+              $.ajax({
+                type: 'POST',
+                url: '{% url 'healthcare:PRG' %}',
+                data:{
+                  height: $('#month').val(),
+                  weight:$('#heightPRG').val(),
+                  
+                 
+                  csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                
+                success:function(response){
+                  
+                  console.log(response.PRG);
+                  $('#PRGresult').text(response.WHR).css('color', 'green');
+                   $('#submitPRG').show();
+                  $('#my_loadPRG').hide();
+                  
+                },
+                error: function(data) {
+                  $('#Notifications').html(data.message).css('color', 'red');
+                    $('#submitPRG').show();
+                $('#my_loadPRG').hide();
+                }
+              });
+            });
+            
+</script>
+
+<script>
+$(document).ready(function() {
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+ 
+  let selectMonth = $("#month");
+ 
+
+
+  for (var m = 0; m < 12; m++) {
+    let month = monthNames[m];
+    let monthElem = document.createElement("option");
+    monthElem.value = month;
+    monthElem.textContent = month;
+    selectMonth.append(monthElem);
+  }
+
+});
+</script>
