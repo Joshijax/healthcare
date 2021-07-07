@@ -16,7 +16,7 @@ class Location(models.Model):
 
 class Hospital(models.Model):
     name = models.CharField(max_length=100)
-    location = models.ForeignKey(Location)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     contact = models.CharField(max_length=100, default='123456789')
     email = models.CharField(max_length=100,default='hospital_email@gmail.com')
     amount = models.PositiveIntegerField(default=100)
@@ -32,8 +32,8 @@ class Department(models.Model):
         return self.department_name
 
 class Transaction(models.Model):
-    from_user = models.ForeignKey(User, related_name='from_user')
-    to_user = models.ForeignKey(User, related_name='to_user')
+    from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)
     time = models.DateTimeField(default=datetime.now)
     amount = models.PositiveIntegerField()
     reason = models.CharField(max_length=100)
@@ -66,9 +66,9 @@ class Appointment(models.Model):
         ('Confirmed', 'Confirmed'),
     )
     appointment_id = models.AutoField(primary_key=True)
-    transaction_id = models.ForeignKey(Transaction)
-    user = models.ForeignKey(User)
-    doctor = models.ForeignKey(DoctorProfile)
+    transaction_id = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(DoctorProfile, on_delete=models.CASCADE)
     booking_time = models.DateTimeField(default=datetime.now)
     appointment_date = models.DateField()
     appointment_time = models.TimeField(blank=True, null=True)
