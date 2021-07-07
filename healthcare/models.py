@@ -4,13 +4,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime 
 from accounts.models import DoctorProfile
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 from django.db import transaction
 
 class Location(models.Model):
     location_id = models.AutoField(primary_key=True)
     location_name = models.CharField(max_length=500)
-
+  
     def __str__(self):
         return self.location_name
 
