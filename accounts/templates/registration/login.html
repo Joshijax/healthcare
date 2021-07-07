@@ -68,7 +68,32 @@
         </style>
         <div style="float:center;">
           <center><h2 style="color: #F96;	display: block;	font-size: 30px;font-weight: 400;">Login<h2><br /></center>
-        {% include 'registration/form-template.html'%}
+        {% if message %}
+            {{ message }}
+        {% endif %}
+        {% comment %} {% for field in form %}
+        <center><div class="form-group">
+            <label class="control-label col-sm-2" style="font-size:15px;color: #F96;	display: block;">{{ field.label_tag }}</label>
+            <div class="search-container">{{ profile_form }}</div>
+            <!-- <input class="form-control" type="" id="search-bar" placeholder="{{ field.placeholder }}"><br /> -->
+            <!-- {{ field }} -->
+        </div>
+        </center>
+        {% endfor %} {% endcomment %}
+        <center><div class="form-group">
+            <label class="control-label col-sm-2" style="font-size:15px;color: #F96;	display: block;"><label for="id_username">username:</label></label>
+            <div class="search-container"><input type="text" name="username" placeholder="Username" class="form-control" id="id_username" required=""></div>
+            <!-- <input class="form-control" type="" id="search-bar" placeholder=""><br /> -->
+            <!-- <input type="text" name="username" placeholder="Username" class="form-control" id="search-bar" required> -->
+        </div>
+        </center>
+        <center><div class="form-group">
+            <label class="control-label col-sm-2" style="font-size:15px;color: #F96;	display: block;"><label for="search-bar">password:</label></label>
+            <div class="search-container"><input type="password" name="password" placeholder="Password" class="form-control" id="search-bar" required=""></div>
+            <!-- <input class="form-control" type="" id="search-bar" placeholder=""><br /> -->
+            <!-- <input type="password" name="password" placeholder="Password" class="form-control" id="search-bar" required> -->
+        </div>
+        </center>
         <script>
         $('#id_username').attr('placeholder', 'Username');
         $('#id_password').attr('placeholder', 'Password');

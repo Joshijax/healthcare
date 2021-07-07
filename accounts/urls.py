@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
@@ -11,6 +12,12 @@ urlpatterns = [
     url(r'^user/(?P<pk>[0-9]+)/', views.UserDetail.as_view(), name='user-detail'),
     url(r'^doctor/(?P<pk>[0-9]+)/', views.DoctorDetail.as_view(), name='doctor-detail'),
     url(r'^home/$', views.UserFormView.as_view(), name='home'),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^login/$', views.LoginFormView.as_view(), name='login'),
+    path('logout/',
+    auth_views.LogoutView.as_view(
+        template_name=None,
+        next_page='/'
+    ),
+    name = 'logout'
+)
 ]

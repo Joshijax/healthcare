@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
-from .forms import UserForm, ProfileForm, DoctorForm, UpdateUserProfile
+from .forms import UserForm, ProfileForm, DoctorForm, UpdateUserProfile, LoginForm
 from .models import UserProfile, DoctorProfile ,User
 from django.contrib.auth import logout
 from healthcare.models import Department
@@ -10,6 +10,10 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db import transaction
+from django.contrib.auth.views import LoginView    
+
+class UserLogin(LoginView):
+    template_name = 'registration/login.html'
 
 class UserFormView(View):
     form_class = UserForm
@@ -49,6 +53,35 @@ class UserFormView(View):
                 if user.is_active:
                     login(request, user)
                     return redirect('healthcare:index')
+
+class LoginFormView(View):
+    form_class = LoginForm
+    template_name = 'registration/login.html'
+
+    def get(self, request):
+        profile_form = LoginForm
+
+        user_form = self.form_class(None)
+        return render(request, self.template_name, {'user_form': user_form, })
+
+    @transaction.atomic
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+           
+
+            
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('healthcare:index')
+
+
 
         return render(request, self.template_name, {'form': form, 'message': form.errors})
 class UserDetail(generic.DetailView):

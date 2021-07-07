@@ -3,6 +3,12 @@ from django import forms
 from .models import UserProfile, DoctorProfile
 from django.forms.widgets import DateInput
 
+class LoginForm(forms.Form):
+   username = forms.CharField(label='username',widget=forms.TextInput(attrs={'placeholder':'Username','class':'form-control','id':'search-bar','required':''}))
+   password = forms.CharField(label='password',widget=forms.PasswordInput(attrs={'placeholder':'Password','class':'form-control','id':'search-bar','required':''}))
+   class Meta:
+        fields = ['username','password']
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(label='password',widget=forms.PasswordInput(attrs={'placeholder':'Password','class':'form-control','id':'search-bar','required':''}))
     username = forms.CharField(label='username',widget=forms.TextInput(attrs={'placeholder':'Username','class':'form-control','id':'search-bar','required':''}))

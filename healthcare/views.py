@@ -183,8 +183,9 @@ class IndexView(generic.ListView):
     template_name = 'healthcare/home.html'
     context_object_name = 'appointments'
 
+    
     def get_queryset(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             if hasattr(self.request.user, 'userprofile'):
                 return Appointment.objects.filter(user=self.request.user)
             elif hasattr(self.request.user, 'doctorprofile'):

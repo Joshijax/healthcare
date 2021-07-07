@@ -20,8 +20,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^',include('accounts.urls')),
+    # url(r'^',include('accounts.urls')),
     url(r'^accounts/',include('accounts.urls')),
+    # url(r'^', include(('account.urls','account' ), namespace='healthcare')),
     url(r'^', include(('healthcare.urls','healthcare' ), namespace='healthcare')),
     
 ]
