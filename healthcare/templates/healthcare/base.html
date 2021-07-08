@@ -54,6 +54,7 @@
               {% endif %}
               {% if request.user.is_authenticated %}
               <li class=""><a href="{% url 'healthcare:index' %}">Appointments</a></li>
+              <li class=""><a href="https://tawk.to/chat/60dbb65265b7290ac638989c/1fa0qens6">Message doctor</a></li>
               <li class=""><a href="{% url 'healthcare:advice' %}">Get Advice</a></li>
               {% comment %} <li class=""><a href="{% url 'healthcare:transactions' %}">Transactions</a></li> {% endcomment %}
               {% else %}
@@ -94,19 +95,23 @@
 
 {% if request.user.is_authenticated %}
 <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/60dbb65265b7290ac638989c/1f9d40d25';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
+
 
 <!--End of Tawk.to Script-->
 {% endif %}
+<!--Start of Tawk.to Script-->
+<div id='tawk_60dbb65265b7290ac638989c'></div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); Tawk_API.embedded='tawk_60dbb65265b7290ac638989c';
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/60dbb65265b7290ac638989c/1fa0qens6';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
